@@ -1,4 +1,4 @@
 
 module.exports = {
-  homepage: "https://dmvianna.github.io",
+  homepage: "https://dmvianna.github.io/my-app",
 }
