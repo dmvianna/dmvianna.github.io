@@ -1,11 +1,15 @@
 { name =
     "Daniel Vianna"
+, title =
+    "Functional Software Engineer"
 , profile =
     "I am a Python developer with a strong Test Driven Development discipline. I write unit tests for pure functions and keep logic, data and I/O strictly segregated. In plain English: my code is easy to alter, easy to bugfix, and is provably built according to specification."
 , goal =
     "You have code written in Python. You need to refactor or move some of its functionality. You know you won't be able to tackle a refactor without testing. You are open to move your codebase to a more functional programming style. Your domain experts are busy doing other things, so you need a new developer to do that work under their guidance."
 , offering =
     "I am a self taught developer with training in functional programming, mainly in Haskell and related languages. I am most comfortable writing Python. I use objects mainly as data structures, and keep business logic separate from it. I use mypy to emulate static checking. I learn programming languages and translate their core concepts into my daily job as a habit."
+, skills =
+    "Seasoned analyst programmer with experience writing SQL, R, Python, and JavaScript. Experienced user of Oracle, SQL Server and PostgreSQL databases. Linux and emacs are my choice of desktop. I version control my work with git. I have an active interest in Elm, Haskell, Rust, and Nix."
 , employment =
     [ { employer =
           "AusNet Services"
