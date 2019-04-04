@@ -1,11 +1,11 @@
 {
-  "main.css": "/static/css/main.8e7baf95.chunk.css",
-  "main.js": "/static/js/main.fe344bcb.chunk.js",
-  "main.css.map": "/static/css/main.8e7baf95.chunk.css.map",
-  "main.js.map": "/static/js/main.fe344bcb.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.d53d57e4.js",
-  "runtime~main.js.map": "/static/js/runtime~main.d53d57e4.js.map",
-  "vendors~main.js": "/static/js/vendors~main.eef4dd01.chunk.js",
-  "vendors~main.js.map": "/static/js/vendors~main.eef4dd01.chunk.js.map",
-  "index.html": "/index.html"
+  "main.css": "/my-app/static/css/main.8e7baf95.chunk.css",
+  "main.js": "/my-app/static/js/main.f12a8533.chunk.js",
+  "main.css.map": "/my-app/static/css/main.8e7baf95.chunk.css.map",
+  "main.js.map": "/my-app/static/js/main.f12a8533.chunk.js.map",
+  "runtime~main.js": "/my-app/static/js/runtime~main.c3e655bb.js",
+  "runtime~main.js.map": "/my-app/static/js/runtime~main.c3e655bb.js.map",
+  "vendors~main.js": "/my-app/static/js/vendors~main.eef4dd01.chunk.js",
+  "vendors~main.js.map": "/my-app/static/js/vendors~main.eef4dd01.chunk.js.map",
+  "index.html": "/my-app/index.html"
 }
