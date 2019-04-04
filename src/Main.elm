@@ -129,6 +129,14 @@ employment emp =
                 , p [] [ text j.dates ]
                 , p [] [ text j.department ]
                 , p [] [ text j.story ]
+                , div []
+                    [ h5 [] [ text "Technology" ]
+                    , ul [] (List.map (\i -> li [] [ text i ]) j.tech)
+                    ]
+                , div []
+                    [ h5 [] [ text "Test Framework" ]
+                    , ul [] (List.map (\i -> li [] [ text i ]) j.testing)
+                    ]
                 ]
 
         viewEmployer e =
