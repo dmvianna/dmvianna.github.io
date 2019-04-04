@@ -116,7 +116,17 @@ view model =
                 , h2 [] [ text "Skills" ]
                 , p [] [ text res.skills ]
                 , h2 [] [ text "Employment" ]
+                , div [] (employment res.employment)
                 ]
+
+
+employment : Employment -> List (Html Msg)
+employment emp =
+    let
+        viewEmployer e =
+            h3 [] [ text e.employer ]
+    in
+    List.map viewEmployer emp
 
 
 
