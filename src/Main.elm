@@ -123,8 +123,19 @@ view model =
 employment : Employment -> List (Html Msg)
 employment emp =
     let
+        viewJobs j =
+            div []
+                [ h4 [] [ text j.job_title ]
+                , p [] [ text j.dates ]
+                , p [] [ text j.department ]
+                , p [] [ text j.story ]
+                ]
+
         viewEmployer e =
-            h3 [] [ text e.employer ]
+            div []
+                [ h3 [] [ text e.employer ]
+                , div [] (List.map viewJobs e.jobs)
+                ]
     in
     List.map viewEmployer emp
 
