@@ -105,7 +105,7 @@ view model =
 
         Ok res ->
             div []
-                [ img [ src "/logo.svg" ] []
+                [ img [ src "/favicon.svg" ] []
                 , h1 [] [ text res.name ]
                 , h2 [] [ text res.title ]
                 , p [] [ text res.profile ]
