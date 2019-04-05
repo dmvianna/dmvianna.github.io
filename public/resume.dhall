@@ -129,4 +129,27 @@
           ]
       }
     ]
+, education =
+    [ { dates =
+          [ 1999, 2003 ]
+      , title =
+          "Doctor of Philosophy in Neuroscience"
+      , institution =
+          "Unversity of S\u00E3o Paulo, Brazil"
+      }
+    , { dates =
+          [ 1997, 1999 ]
+      , title =
+          "Master of Science in Neuroscience"
+      , institution =
+          "University of S\u00E3o Paulo, Brazil"
+      }
+    , { dates =
+          [ 1991, 1995 ]
+      , title =
+          "Bachelor of Psychology"
+      , institution =
+          "Pontifical Catholic University of Rio de Janeiro, Brazil"
+      }
+    ]
 }
