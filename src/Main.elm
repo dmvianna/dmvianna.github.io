@@ -3,7 +3,7 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (src)
-import Json.Decode as D exposing (Decoder(..), field, list, string)
+import Json.Decode as D exposing (Decoder(..), field, int, list, string)
 
 
 type alias Resume =
@@ -14,12 +14,13 @@ type alias Resume =
     , offering : String
     , skills : String
     , employment : Employment
+    , education : List Course
     }
 
 
 resume : Decoder Resume
 resume =
-    D.map7 Resume
+    D.map8 Resume
         (field "name" string)
         (field "title" string)
         (field "profile" string)
@@ -27,6 +28,7 @@ resume =
         (field "offering" string)
         (field "skills" string)
         (field "employment" <| list employer)
+        (field "education" <| list course)
 
 
 type alias Employment =
@@ -65,6 +67,25 @@ job =
         (field "story" string)
         (field "tech" <| list string)
         (field "testing" <| list string)
+
+
+type alias Education =
+    List Course
+
+
+type alias Course =
+    { dates : List Int
+    , title : String
+    , institution : String
+    }
+
+
+course : Decoder Course
+course =
+    D.map3 Course
+        (field "dates" <| list int)
+        (field "title" string)
+        (field "institution" string)
 
 
 
@@ -117,6 +138,7 @@ view model =
                 , p [] [ text res.skills ]
                 , h2 [] [ text "Employment" ]
                 , div [] (employment res.employment)
+                , div [] (education res.education)
                 ]
 
 
@@ -146,6 +168,20 @@ employment emp =
                 ]
     in
     List.map viewEmployer emp
+
+
+education : Education -> List (Html Msg)
+education edu =
+    let
+        viewEducation e =
+            div []
+                [ div [] (List.map (\d -> p [] [ text <| String.fromInt d ]) e.dates)
+                , h3 [] [ text e.title ]
+
+                -- , p [] [ e.institution ]
+                ]
+    in
+    List.map viewEducation edu
 
 
 
