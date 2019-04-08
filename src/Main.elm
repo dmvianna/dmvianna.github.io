@@ -1,8 +1,9 @@
 module Main exposing (Model, Msg(..), init, main, update, view)
 
+-- import Html.Attributes exposing (src)
+
 import Browser
-import Html exposing (..)
-import Html.Attributes exposing (src)
+import Element exposing (..)
 import Json.Decode as D exposing (Decoder(..), field, int, list, string)
 
 
@@ -118,67 +119,69 @@ update msg model =
 ---- VIEW ----
 
 
-view : Model -> Html Msg
+view : Model -> Element Msg
 view model =
     case model of
         Err e ->
-            h1 [] [ text "configuration error" ]
+            el [] (text "configuration error")
 
         Ok res ->
-            div []
-                [ img [ src "/favicon.svg" ] []
-                , h1 [] [ text res.name ]
-                , h2 [] [ text res.title ]
-                , p [] [ text res.profile ]
-                , h2 [] [ text "What I am looking for" ]
-                , p [] [ text res.goal ]
-                , h2 [] [ text "What you are looking for" ]
-                , p [] [ text res.offering ]
-                , h2 [] [ text "Skills" ]
-                , p [] [ text res.skills ]
-                , h2 [] [ text "Employment" ]
-                , div [] (employment res.employment)
-                , div [] (education res.education)
+            column []
+                [ image []
+                    { src = "/favicon.svg"
+                    , description = "A red circle"
+                    }
+                , el [] (text res.name)
+                , el [] (text res.title)
+                , paragraph [] [ text res.profile ]
+                , el [] (text "What I am looking for")
+                , paragraph [] [ text res.goal ]
+                , el [] (text "What you are looking for")
+                , paragraph [] [ text res.offering ]
+                , el [] (text "Skills")
+                , el [] (text res.skills)
+                , el [] (text "Employment")
+                , column [] (employment res.employment)
+                , column [] (education res.education)
                 ]
 
 
-employment : Employment -> List (Html Msg)
+employment : Employment -> List (Element Msg)
 employment emp =
     let
         viewJobs j =
-            div []
-                [ h4 [] [ text j.job_title ]
-                , p [] [ text j.dates ]
-                , p [] [ text j.department ]
-                , p [] [ text j.story ]
-                , div []
-                    [ h5 [] [ text "Technology" ]
-                    , ul [] (List.map (\i -> li [] [ text i ]) j.tech)
+            column []
+                [ el [] (text j.job_title)
+                , paragraph [] [ text j.dates ]
+                , paragraph [] [ text j.department ]
+                , paragraph [] [ text j.story ]
+                , column []
+                    [ el [] (text "Technology")
+                    , row [] (List.map (\i -> el [] (text i)) j.tech)
                     ]
-                , div []
-                    [ h5 [] [ text "Test Framework" ]
-                    , ul [] (List.map (\i -> li [] [ text i ]) j.testing)
+                , column []
+                    [ el [] (text "Test Framework")
+                    , row [] (List.map (\i -> el [] (text i)) j.testing)
                     ]
                 ]
 
         viewEmployer e =
-            div []
-                [ h3 [] [ text e.employer ]
-                , div [] (List.map viewJobs e.jobs)
+            column []
+                [ el [] (text e.employer)
+                , column [] (List.map viewJobs e.jobs)
                 ]
     in
     List.map viewEmployer emp
 
 
-education : Education -> List (Html Msg)
+education : Education -> List (Element Msg)
 education edu =
     let
         viewEducation e =
-            div []
-                [ div [] (List.map (\d -> p [] [ text <| String.fromInt d ]) e.dates)
-                , h3 [] [ text e.title ]
-
-                -- , p [] [ e.institution ]
+            column []
+                [ row [] (List.map (\d -> paragraph [] [ text <| String.fromInt d ]) e.dates)
+                , el [] (text e.title)
+                , paragraph [] [ text e.institution ]
                 ]
     in
     List.map viewEducation edu
@@ -191,7 +194,7 @@ education edu =
 main : Program String Model Msg
 main =
     Browser.element
-        { view = view
+        { view = \model -> layout [] <| view model
         , init = init
         , update = update
         , subscriptions = always Sub.none
