@@ -141,24 +141,30 @@ view model =
         Model (Err e) _ ->
             el [] (text "configuration error")
 
-        Model (Ok res) _ ->
-            column []
-                [ image []
-                    { src = "/favicon.svg"
-                    , description = "A red circle"
-                    }
-                , el [] (text res.name)
-                , el [] (text res.title)
-                , paragraph [] [ text res.profile ]
-                , el [] (text "What I am looking for")
-                , paragraph [] [ text res.goal ]
-                , el [] (text "What you are looking for")
-                , paragraph [] [ text res.offering ]
-                , el [] (text "Skills")
-                , el [] (text res.skills)
-                , el [] (text "Employment")
-                , column [] (employment res.employment)
-                , column [] (education res.education)
+        Model (Ok res) size ->
+            column
+                [ padding 20
+                , width <| px (size.width - 20)
+                ]
+                [ textColumn
+                    []
+                    [ image [ alignLeft ]
+                        { src = "/favicon.svg"
+                        , description = "A red circle"
+                        }
+                    , el [] (text res.name)
+                    , el [] (text res.title)
+                    , paragraph [] [ text res.profile ]
+                    , el [] (text "What I am looking for")
+                    , paragraph [] [ text res.goal ]
+                    , el [] (text "What you are looking for")
+                    , paragraph [] [ text res.offering ]
+                    , el [] (text "Skills")
+                    , paragraph [] [ text res.skills ]
+                    , el [] (text "Employment")
+                    , column [] (employment res.employment)
+                    , column [] (education res.education)
+                    ]
                 ]
 
 
