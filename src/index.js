@@ -5,7 +5,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 Elm.Main.init({
   node: document.getElementById('root'),
-  flags: JSON.stringify(resume.default)
+  flags: { initJson: JSON.stringify(resume.default),
+    width: window.innerWidth,
+    height: window.innerHeight
+  }
 });
 
 registerServiceWorker();

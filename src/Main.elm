@@ -93,13 +93,29 @@ course =
 ---- MODEL ----
 
 
-type alias Model =
-    Result D.Error Resume
+type alias WindowSize =
+    { width : Int, height : Int }
 
 
-init : String -> ( Model, Cmd Msg )
+type Model
+    = Model (Result D.Error Resume) WindowSize
+
+
+type alias Flags =
+    { initJson : String, width : Int, height : Int }
+
+
+init : Flags -> ( Model, Cmd Msg )
 init flags =
-    ( D.decodeString resume flags, Cmd.none )
+    let
+        { initJson, width, height } =
+            flags
+    in
+    ( Model
+        (D.decodeString resume initJson)
+        (WindowSize width height)
+    , Cmd.none
+    )
 
 
 
@@ -122,10 +138,10 @@ update msg model =
 view : Model -> Element Msg
 view model =
     case model of
-        Err e ->
+        Model (Err e) _ ->
             el [] (text "configuration error")
 
-        Ok res ->
+        Model (Ok res) _ ->
             column []
                 [ image []
                     { src = "/favicon.svg"
@@ -191,7 +207,7 @@ education edu =
 ---- PROGRAM ----
 
 
-main : Program String Model Msg
+main : Program Flags Model Msg
 main =
     Browser.element
         { view = \model -> layout [] <| view model
