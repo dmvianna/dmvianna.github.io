@@ -4,6 +4,7 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser
 import Element exposing (..)
+import Element.Font as Font
 import Json.Decode as D exposing (Decoder(..), field, int, list, string)
 
 
@@ -148,19 +149,21 @@ view model =
                 ]
                 [ textColumn
                     []
-                    [ image [ alignLeft ]
+                    [ image [ alignLeft, padding 20 ]
                         { src = "/favicon.svg"
                         , description = "A red circle"
                         }
-                    , el [] (text res.name)
-                    , el [] (text res.title)
-                    , paragraph [] [ text res.profile ]
+                    , column [ padding 20 ]
+                        [ el [ Font.bold, padding 5, centerX ] (text res.name)
+                        , el [ padding 5, centerX ] (text res.title)
+                        ]
+                    , paragraph [ Font.justify ] [ text res.profile ]
                     , el [] (text "What I am looking for")
-                    , paragraph [] [ text res.goal ]
+                    , paragraph [ Font.justify ] [ text res.goal ]
                     , el [] (text "What you are looking for")
-                    , paragraph [] [ text res.offering ]
+                    , paragraph [ Font.justify ] [ text res.offering ]
                     , el [] (text "Skills")
-                    , paragraph [] [ text res.skills ]
+                    , paragraph [ Font.justify ] [ text res.skills ]
                     , el [] (text "Employment")
                     , column [] (employment res.employment)
                     , column [] (education res.education)
@@ -176,14 +179,16 @@ employment emp =
                 [ el [] (text j.job_title)
                 , paragraph [] [ text j.dates ]
                 , paragraph [] [ text j.department ]
-                , paragraph [] [ text j.story ]
+                , paragraph [ Font.justify ] [ text j.story ]
                 , column []
                     [ el [] (text "Technology")
-                    , row [] (List.map (\i -> el [] (text i)) j.tech)
+                    , row [ padding 10, spacing 10 ]
+                        (List.map (\i -> el [] (text i)) j.tech)
                     ]
                 , column []
                     [ el [] (text "Test Framework")
-                    , row [] (List.map (\i -> el [] (text i)) j.testing)
+                    , row [ padding 10, spacing 10 ]
+                        (List.map (\i -> el [] (text i)) j.testing)
                     ]
                 ]
 
