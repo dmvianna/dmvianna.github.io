@@ -4,6 +4,7 @@ module Main exposing (Model, Msg(..), init, main, update, view)
 
 import Browser
 import Element exposing (..)
+import Element.Border as Border
 import Element.Font as Font
 import Json.Decode as D exposing (Decoder(..), field, int, list, string)
 
@@ -154,21 +155,60 @@ view model =
                         , description = "A red circle"
                         }
                     , column [ padding 20 ]
-                        [ el [ Font.bold, padding 5, centerX ] (text res.name)
-                        , el [ padding 5, centerX ] (text res.title)
+                        [ el
+                            [ Font.bold
+                            , padding 5
+                            , centerX
+                            ]
+                            (text res.name)
+                        , el [ padding 5, centerX ]
+                            (text res.title)
                         ]
-                    , paragraph [ Font.justify ] [ text res.profile ]
-                    , el [] (text "What I am looking for")
-                    , paragraph [ Font.justify ] [ text res.goal ]
-                    , el [] (text "What you are looking for")
+                    , paragraph
+                        [ Font.justify
+                        , padding 10
+                        , bottomLine
+                        ]
+                        [ text res.profile ]
+                    , paragraph [ padding 10 ]
+                        [ titleBox
+                            (text "What I am looking for")
+                        , paragraph [ Font.justify ] [ text res.goal ]
+                        ]
+                    , paragraph [ padding 10 ]
+                        [ titleBox
+                            (text "What you are looking for")
+                        ]
                     , paragraph [ Font.justify ] [ text res.offering ]
-                    , el [] (text "Skills")
+                    , paragraph [ padding 10 ]
+                        [ titleBox (text "Skills") ]
                     , paragraph [ Font.justify ] [ text res.skills ]
-                    , el [] (text "Employment")
-                    , column [] (employment res.employment)
-                    , column [] (education res.education)
+                    , row
+                        [ padding 10
+                        , Font.bold
+                        , bottomLine
+                        ]
+                        [ text "Employment" ]
+                    , column [ padding 10 ] (employment res.employment)
+                    , row
+                        [ padding 10
+                        , Font.bold
+                        , bottomLine
+                        ]
+                        [ text "Education" ]
+                    , column [ padding 10 ] (education res.education)
                     ]
                 ]
+
+
+bottomLine : Attribute Msg
+bottomLine =
+    Border.widthEach
+        { bottom = 2
+        , left = 0
+        , right = 0
+        , top = 0
+        }
 
 
 employment : Employment -> List (Element Msg)
@@ -206,12 +246,22 @@ education edu =
     let
         viewEducation e =
             column []
-                [ row [] (List.map (\d -> paragraph [] [ text <| String.fromInt d ]) e.dates)
+                [ row [ spacing 10 ] (List.map (\d -> paragraph [] [ text <| String.fromInt d ]) e.dates)
                 , el [] (text e.title)
                 , paragraph [] [ text e.institution ]
                 ]
     in
     List.map viewEducation edu
+
+
+titleBox : Element msg -> Element msg
+titleBox =
+    el
+        [ alignLeft
+        , padding 10
+        , width <| px 100
+        , Font.bold
+        ]
 
 
 
