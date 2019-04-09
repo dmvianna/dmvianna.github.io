@@ -166,37 +166,38 @@ view model =
                         ]
                     , paragraph
                         [ Font.justify
-                        , padding 10
-                        , bottomLine
+                        , paddingXY 0 30
+
+                        -- , bottomLine
                         ]
                         [ text res.profile ]
-                    , paragraph [ padding 10 ]
+                    , paragraph [ paddingXY 0 10 ]
                         [ titleBox
                             (text "What I am looking for")
                         , paragraph [ Font.justify ] [ text res.goal ]
                         ]
-                    , paragraph [ padding 10 ]
+                    , paragraph [ paddingXY 0 10 ]
                         [ titleBox
                             (text "What you are looking for")
                         ]
                     , paragraph [ Font.justify ] [ text res.offering ]
-                    , paragraph [ padding 10 ]
+                    , paragraph [ paddingXY 0 10 ]
                         [ titleBox (text "Skills") ]
                     , paragraph [ Font.justify ] [ text res.skills ]
                     , row
-                        [ padding 10
+                        [ paddingEach { edges | top = 40, bottom = 10 }
                         , Font.bold
                         , bottomLine
                         ]
                         [ text "Employment" ]
-                    , column [ padding 10 ] (employment res.employment)
+                    , column [ paddingXY 0 10 ] (employment res.employment)
                     , row
-                        [ padding 10
+                        [ paddingXY 0 10
                         , Font.bold
                         , bottomLine
                         ]
                         [ text "Education" ]
-                    , column [ padding 10 ] (education res.education)
+                    , column [ paddingXY 0 10 ] (education res.education)
                     ]
                 ]
 
@@ -219,7 +220,7 @@ employment : Employment -> List (Element Msg)
 employment emp =
     let
         viewJobs j =
-            column []
+            column [ paddingXY 0 25 ]
                 [ paragraph
                     []
                     [ column
@@ -247,22 +248,20 @@ employment emp =
                             [ text j.department ]
                         ]
                     , paragraph [ Font.justify ] [ text j.story ]
-                    , column []
-                        [ el [] (text "Technology")
-                        , row [ padding 10, spacing 10 ]
-                            (List.map (\i -> el [] (text i)) j.tech)
+                    , column
+                        [ alignLeft
+
+                        -- , explain Debug.todo
                         ]
-                    , column []
-                        [ el [] (text "Test Framework")
-                        , row [ padding 10, spacing 10 ]
-                            (List.map (\i -> el [] (text i)) j.testing)
+                        [ keywords "Technology" j.tech 200
+                        , keywords "Test Framework" j.testing 200
                         ]
                     ]
                 ]
 
         viewEmployer e =
             column []
-                [ el [ Font.size 25, padding 10 ] (text e.employer)
+                [ el [ Font.size 25, padding 20, centerX ] (text e.employer)
                 , textColumn [] (List.map viewJobs e.jobs)
                 ]
     in
@@ -290,6 +289,32 @@ titleBox =
         , width <| px 100
         , Font.bold
         ]
+
+
+keywords : String -> List String -> Int -> Element msg
+keywords header list width_ =
+    if List.length list == 0 then
+        none
+
+    else
+        row []
+            [ el
+                [ Font.size 15
+                , Font.bold
+                , alignTop
+                , padding 10
+                ]
+                (text header)
+            , wrappedRow
+                [ padding 10
+                , width (fill |> maximum width_)
+                , spacing 10
+                ]
+                (List.map
+                    (\i -> el [ Font.size 15 ] (text i))
+                    (List.sort list)
+                )
+            ]
 
 
 
