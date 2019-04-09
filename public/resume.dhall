@@ -69,7 +69,7 @@
             , tech =
                 [ "Oracle", "PostgreSQL", "RedHat Linux", "Python", "Excel" ]
             , testing =
-                [ "" ]
+                [] : List Text
             }
           , { job_title =
                 "Data Analyst"
@@ -102,7 +102,7 @@
             , tech =
                 [ "Python", "Oracle", "RedHat Linux" ]
             , testing =
-                [ "" ]
+                [] : List Text
             }
           ]
       }
@@ -124,7 +124,7 @@
             , tech =
                 [ "Oracle", "Python", "R" ]
             , testing =
-                [ "" ]
+                [] : List Text
             }
           ]
       }
