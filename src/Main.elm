@@ -247,7 +247,7 @@ employment emp =
                             ]
                             [ text j.department ]
                         ]
-                    , paragraph [ Font.justify ] [ text j.story ]
+                    , story j.story
                     , column
                         [ alignLeft
 
@@ -268,6 +268,21 @@ employment emp =
     List.map viewEmployer emp
 
 
+story : String -> Element Msg
+story description =
+    textColumn [ spacing 10 ]
+        (List.map
+            (\i ->
+                paragraph
+                    [ Font.justify
+                    ]
+                    [ text i ]
+            )
+         <|
+            String.split "\n" description
+        )
+
+
 education : Education -> List (Element Msg)
 education edu =
     let
@@ -281,7 +296,7 @@ education edu =
     List.map viewEducation edu
 
 
-titleBox : Element msg -> Element msg
+titleBox : Element Msg -> Element Msg
 titleBox =
     el
         [ alignLeft
@@ -291,7 +306,7 @@ titleBox =
         ]
 
 
-keywords : String -> List String -> Int -> Element msg
+keywords : String -> List String -> Int -> Element Msg
 keywords header list width_ =
     if List.length list == 0 then
         none
