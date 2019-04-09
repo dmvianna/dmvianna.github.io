@@ -215,10 +215,21 @@ employment : Employment -> List (Element Msg)
 employment emp =
     let
         viewJobs j =
-            column []
-                [ el [] (text j.job_title)
-                , paragraph [] [ text j.dates ]
-                , paragraph [] [ text j.department ]
+            textColumn []
+                [ textColumn []
+                    [ el
+                        [ Font.bold
+                        , alignLeft
+                        ]
+                        (text j.job_title)
+                    , textColumn
+                        [ alignLeft
+                        , width <| px 200
+                        ]
+                        [ paragraph [] [ text j.dates ]
+                        , paragraph [] [ text j.department ]
+                        ]
+                    ]
                 , paragraph [ Font.justify ] [ text j.story ]
                 , column []
                     [ el [] (text "Technology")
@@ -234,8 +245,8 @@ employment emp =
 
         viewEmployer e =
             column []
-                [ el [] (text e.employer)
-                , column [] (List.map viewJobs e.jobs)
+                [ el [ Font.size 25, padding 10 ] (text e.employer)
+                , textColumn [] (List.map viewJobs e.jobs)
                 ]
     in
     List.map viewEmployer emp
