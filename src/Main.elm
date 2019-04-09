@@ -317,7 +317,7 @@ keywords header list width_ =
                 [ Font.size 15
                 , Font.bold
                 , alignTop
-                , padding 10
+                , paddingEach { edges | top = 10 }
                 ]
                 (text header)
             , wrappedRow
