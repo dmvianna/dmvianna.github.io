@@ -135,7 +135,7 @@
       , title =
           "Doctor of Philosophy in Neuroscience"
       , institution =
-          "Unversity of S\u00E3o Paulo, Brazil"
+          "University of S\u00E3o Paulo, Brazil"
       }
     , { dates =
           [ 1997, 1999 ]
