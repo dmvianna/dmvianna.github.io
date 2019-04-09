@@ -201,45 +201,62 @@ view model =
                 ]
 
 
+edges =
+    { top = 0
+    , right = 0
+    , bottom = 0
+    , left = 0
+    }
+
+
 bottomLine : Attribute Msg
 bottomLine =
     Border.widthEach
-        { bottom = 2
-        , left = 0
-        , right = 0
-        , top = 0
-        }
+        { edges | bottom = 2 }
 
 
 employment : Employment -> List (Element Msg)
 employment emp =
     let
         viewJobs j =
-            textColumn []
-                [ textColumn []
-                    [ el
-                        [ Font.bold
-                        , alignLeft
-                        ]
-                        (text j.job_title)
-                    , textColumn
+            column []
+                [ paragraph
+                    []
+                    [ column
                         [ alignLeft
-                        , width <| px 200
+                        , width <| px 250
+                        , padding 10
                         ]
-                        [ paragraph [] [ text j.dates ]
-                        , paragraph [] [ text j.department ]
+                        [ paragraph
+                            [ Font.bold
+                            , paddingEach { edges | bottom = 10 }
+                            , bottomLine
+                            ]
+                            [ text j.job_title ]
+                        , column
+                            [ Font.size 15
+                            , Font.alignLeft
+                            , padding 5
+                            ]
+                            [ text j.dates ]
+                        , paragraph
+                            [ Font.size 18
+                            , Font.alignLeft
+                            , padding 5
+                            ]
+                            [ text j.department ]
                         ]
-                    ]
-                , paragraph [ Font.justify ] [ text j.story ]
-                , column []
-                    [ el [] (text "Technology")
-                    , row [ padding 10, spacing 10 ]
-                        (List.map (\i -> el [] (text i)) j.tech)
-                    ]
-                , column []
-                    [ el [] (text "Test Framework")
-                    , row [ padding 10, spacing 10 ]
-                        (List.map (\i -> el [] (text i)) j.testing)
+                    , paragraph [ Font.justify ] [ text j.story ]
+                    , column []
+                        [ el [] (text "Technology")
+                        , row [ padding 10, spacing 10 ]
+                            (List.map (\i -> el [] (text i)) j.tech)
+                        ]
+                    , column []
+                        [ el [] (text "Test Framework")
+                        , row [ padding 10, spacing 10 ]
+                            (List.map (\i -> el [] (text i)) j.testing)
+                        ]
                     ]
                 ]
 
