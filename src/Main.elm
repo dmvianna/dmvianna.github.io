@@ -216,6 +216,34 @@ bottomLine =
         { edges | bottom = 2 }
 
 
+jobBox : Job -> Element Msg
+jobBox j =
+    column
+        [ alignLeft
+        , width <| px 250
+        , padding 10
+        ]
+        [ paragraph
+            [ Font.bold
+            , paddingEach { edges | bottom = 10 }
+            , bottomLine
+            ]
+            [ text j.job_title ]
+        , column
+            [ Font.size 15
+            , Font.alignLeft
+            , padding 5
+            ]
+            [ text j.dates ]
+        , paragraph
+            [ Font.size 18
+            , Font.alignLeft
+            , padding 5
+            ]
+            [ text j.department ]
+        ]
+
+
 employment : Employment -> List (Element Msg)
 employment emp =
     let
@@ -223,30 +251,7 @@ employment emp =
             column [ paddingXY 0 25 ]
                 [ paragraph
                     []
-                    [ column
-                        [ alignLeft
-                        , width <| px 250
-                        , padding 10
-                        ]
-                        [ paragraph
-                            [ Font.bold
-                            , paddingEach { edges | bottom = 10 }
-                            , bottomLine
-                            ]
-                            [ text j.job_title ]
-                        , column
-                            [ Font.size 15
-                            , Font.alignLeft
-                            , padding 5
-                            ]
-                            [ text j.dates ]
-                        , paragraph
-                            [ Font.size 18
-                            , Font.alignLeft
-                            , padding 5
-                            ]
-                            [ text j.department ]
-                        ]
+                    [ jobBox j
                     , story j.story
                     , column
                         [ alignLeft
