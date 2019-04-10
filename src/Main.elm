@@ -286,21 +286,18 @@ education : Education -> List (Element Msg)
 education edu =
     let
         viewEducation e =
-            column []
+            column [ paddingXY 0 10 ]
                 [ row [ spacing 10 ]
                     (List.map
                         (\d ->
                             paragraph
-                                [ Font.size 15
-                                , Font.alignLeft
-                                , padding 5
-                                ]
+                                [ Font.size 15 ]
                                 [ text <| String.fromInt d ]
                         )
                         e.dates
                     )
-                , el [] (text e.title)
-                , paragraph [] [ text e.institution ]
+                , el [ paddingXY 0 5 ] (text e.title)
+                , el [ Font.size 15 ] (text e.institution)
                 ]
     in
     List.map viewEducation edu
