@@ -156,19 +156,17 @@ view model =
                         }
                     , column [ padding 20 ]
                         [ el
-                            [ Font.bold
-                            , padding 5
+                            [ Font.size 30
+                            , padding 20
                             , centerX
                             ]
                             (text res.name)
-                        , el [ padding 5, centerX ]
+                        , el [ Font.size 18, centerX ]
                             (text res.title)
                         ]
                     , paragraph
                         [ Font.justify
                         , paddingXY 0 30
-
-                        -- , bottomLine
                         ]
                         [ text res.profile ]
                     , paragraph []
