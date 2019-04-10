@@ -171,7 +171,7 @@ view model =
                         -- , bottomLine
                         ]
                         [ text res.profile ]
-                    , paragraph [ paddingXY 0 10 ]
+                    , paragraph []
                         [ titleBox
                             (text "What I am looking for")
                         , paragraph [ Font.justify ] [ text res.goal ]
@@ -255,11 +255,10 @@ employment emp =
                     , story j.story
                     , column
                         [ alignLeft
-
-                        -- , explain Debug.todo
+                        , alignBottom
                         ]
-                        [ keywords "Technology" j.tech 200
-                        , keywords "Test Framework" j.testing 200
+                        [ keywords "Technology" j.tech 150
+                        , keywords "Test Framework" j.testing 150
                         ]
                     ]
                 ]
@@ -277,12 +276,7 @@ story : String -> Element Msg
 story description =
     textColumn [ spacing 10 ]
         (List.map
-            (\i ->
-                paragraph
-                    [ Font.justify
-                    ]
-                    [ text i ]
-            )
+            (\i -> paragraph [ Font.justify ] [ text i ])
          <|
             String.split "\n" description
         )
@@ -293,7 +287,18 @@ education edu =
     let
         viewEducation e =
             column []
-                [ row [ spacing 10 ] (List.map (\d -> paragraph [] [ text <| String.fromInt d ]) e.dates)
+                [ row [ spacing 10 ]
+                    (List.map
+                        (\d ->
+                            paragraph
+                                [ Font.size 15
+                                , Font.alignLeft
+                                , padding 5
+                                ]
+                                [ text <| String.fromInt d ]
+                        )
+                        e.dates
+                    )
                 , el [] (text e.title)
                 , paragraph [] [ text e.institution ]
                 ]
@@ -327,7 +332,7 @@ keywords header list width_ =
                 (text header)
             , wrappedRow
                 [ padding 10
-                , width (fill |> maximum width_)
+                , width fill
                 , spacing 10
                 ]
                 (List.map
