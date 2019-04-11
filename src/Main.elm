@@ -164,24 +164,9 @@ view model =
                                 (text res.title)
                             ]
                         ]
-                    , paragraph
-                        [ Font.justify
-                        , paddingXY 0 30
-                        ]
-                        [ text res.profile ]
-                    , paragraph [ paddingXY 0 10 ]
-                        [ titleBox
-                            (text "What I am looking for")
-                        , paragraph [ Font.justify ] [ text res.goal ]
-                        ]
-                    , paragraph [ paddingXY 0 10 ]
-                        [ titleBox
-                            (text "What you are looking for")
-                        , paragraph [ Font.justify ] [ text res.offering ]
-                        ]
-                    , paragraph [ paddingXY 0 10 ]
-                        [ titleBox (text "Skills") ]
-                    , paragraph [ Font.justify ] [ text res.skills ]
+                    , titleBox "What I am looking for" res.goal
+                    , titleBox "What you are looking for" res.offering
+                    , titleBox "Skills" res.skills
                     , el
                         [ paddingEach { edges | top = 40, bottom = 10 }
                         , Font.bold
@@ -305,13 +290,17 @@ education edu =
     List.map viewEducation edu
 
 
-titleBox : Element Msg -> Element Msg
-titleBox =
-    el
-        [ alignLeft
-        , padding 10
-        , width <| px 100
-        , Font.bold
+titleBox : String -> String -> Element Msg
+titleBox title para =
+    paragraph [ paddingXY 0 10 ]
+        [ el
+            [ alignLeft
+            , padding 10
+            , width <| px 100
+            , Font.bold
+            ]
+            (text title)
+        , paragraph [ Font.justify ] [ text para ]
         ]
 
 
