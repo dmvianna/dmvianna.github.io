@@ -146,7 +146,6 @@ view model =
         Model (Ok res) size ->
             column
                 [ padding 20
-                , width <| px (size.width - 20)
                 ]
                 [ column
                     []
@@ -170,7 +169,7 @@ view model =
                         , paddingXY 0 30
                         ]
                         [ text res.profile ]
-                    , paragraph []
+                    , paragraph [ paddingXY 0 10 ]
                         [ titleBox
                             (text "What I am looking for")
                         , paragraph [ Font.justify ] [ text res.goal ]
@@ -178,8 +177,8 @@ view model =
                     , paragraph [ paddingXY 0 10 ]
                         [ titleBox
                             (text "What you are looking for")
+                        , paragraph [ Font.justify ] [ text res.offering ]
                         ]
-                    , paragraph [ Font.justify ] [ text res.offering ]
                     , paragraph [ paddingXY 0 10 ]
                         [ titleBox (text "Skills") ]
                     , paragraph [ Font.justify ] [ text res.skills ]
