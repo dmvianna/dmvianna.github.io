@@ -148,21 +148,22 @@ view model =
                 [ padding 20
                 , width <| px (size.width - 20)
                 ]
-                [ textColumn
+                [ column
                     []
-                    [ image [ alignLeft, padding 20 ]
-                        { src = "/favicon.svg"
-                        , description = "A red circle"
-                        }
-                    , column [ padding 20 ]
-                        [ el
-                            [ Font.size 30
-                            , padding 20
-                            , centerX
+                    [ wrappedRow [ width fill ]
+                        [ image [ padding 20 ]
+                            { src = "/favicon.svg"
+                            , description = "A red circle"
+                            }
+                        , column [ padding 20, spacing 20, centerX ]
+                            [ el
+                                [ Font.size 30
+                                , centerX
+                                ]
+                                (text res.name)
+                            , el [ Font.size 18, centerX ]
+                                (text res.title)
                             ]
-                            (text res.name)
-                        , el [ Font.size 18, centerX ]
-                            (text res.title)
                         ]
                     , paragraph
                         [ Font.justify
@@ -182,19 +183,23 @@ view model =
                     , paragraph [ paddingXY 0 10 ]
                         [ titleBox (text "Skills") ]
                     , paragraph [ Font.justify ] [ text res.skills ]
-                    , row
+                    , el
                         [ paddingEach { edges | top = 40, bottom = 10 }
                         , Font.bold
+                        , Font.alignLeft
+                        , width fill
                         , bottomLine
                         ]
-                        [ text "Employment" ]
+                        (text "Employment")
                     , column [ paddingXY 0 10 ] (employment res.employment)
-                    , row
+                    , el
                         [ paddingXY 0 10
                         , Font.bold
+                        , Font.alignLeft
+                        , width fill
                         , bottomLine
                         ]
-                        [ text "Education" ]
+                        (text "Education")
                     , column [ paddingXY 0 10 ] (education res.education)
                     ]
                 ]
@@ -263,7 +268,7 @@ employment emp =
 
         viewEmployer e =
             column []
-                [ el [ Font.size 25, padding 20, centerX ] (text e.employer)
+                [ paragraph [ Font.size 25, padding 20, centerX ] [ text e.employer ]
                 , textColumn [] (List.map viewJobs e.jobs)
                 ]
     in
@@ -285,7 +290,7 @@ education edu =
     let
         viewEducation e =
             column [ paddingXY 0 10 ]
-                [ row [ spacing 10 ]
+                [ wrappedRow [ spacing 10 ]
                     (List.map
                         (\d ->
                             paragraph
@@ -317,7 +322,7 @@ keywords header list width_ =
         none
 
     else
-        row []
+        wrappedRow []
             [ el
                 [ Font.size 15
                 , Font.bold
