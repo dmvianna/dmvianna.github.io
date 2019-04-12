@@ -150,10 +150,13 @@ view model =
                 [ column
                     []
                     [ wrappedRow [ width fill ]
-                        [ image [ padding 20 ]
-                            { src = "/favicon.svg"
-                            , description = "A red circle"
-                            }
+                        [ el [ width fill ]
+                            (image
+                                [ padding 20, centerX ]
+                                { src = "/favicon.svg"
+                                , description = "A red circle"
+                                }
+                            )
                         , column [ padding 20, spacing 20, centerX ]
                             [ el
                                 [ Font.size 30
@@ -165,6 +168,15 @@ view model =
                             ]
                         ]
                     , paragraph [ Font.justify ] [ text res.profile ]
+                    , el
+                        [ width <| px 50
+                        , centerX
+                        , padding 10
+                        , Border.widthEach
+                            { edges | bottom = 2 }
+                        ]
+                        none
+                    , el [ paddingEach { edges | top = 20 } ] none
                     , titleBox "What I am looking for" res.goal
                     , titleBox "What you are looking for" res.offering
                     , titleBox "Skills" res.skills
