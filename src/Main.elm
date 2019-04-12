@@ -164,6 +164,7 @@ view model =
                                 (text res.title)
                             ]
                         ]
+                    , paragraph [ Font.justify ] [ text res.profile ]
                     , titleBox "What I am looking for" res.goal
                     , titleBox "What you are looking for" res.offering
                     , titleBox "Skills" res.skills
