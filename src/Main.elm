@@ -167,19 +167,14 @@ view model =
                                 (text res.title)
                             ]
                         ]
+                    , dividingLine 40
                     , paragraph [ Font.justify ] [ text res.profile ]
-                    , el
-                        [ width <| px 50
-                        , centerX
-                        , padding 10
-                        , Border.widthEach
-                            { edges | bottom = 2 }
+                    , dividingLine 40
+                    , column [ spacing 10 ]
+                        [ titleBox "What I am looking for" res.goal
+                        , titleBox "What you are looking for" res.offering
+                        , titleBox "Skills" res.skills
                         ]
-                        none
-                    , el [ paddingEach { edges | top = 20 } ] none
-                    , titleBox "What I am looking for" res.goal
-                    , titleBox "What you are looking for" res.offering
-                    , titleBox "Skills" res.skills
                     , el
                         [ paddingEach { edges | top = 40, bottom = 10 }
                         , Font.bold
@@ -200,6 +195,21 @@ view model =
                     , column [ paddingXY 0 10 ] (education res.education)
                     ]
                 ]
+
+
+dividingLine : Int -> Element Msg
+dividingLine padHeight =
+    column [ width fill ]
+        [ el
+            [ width <| px 50
+            , centerX
+            , paddingEach { edges | top = padHeight }
+            , Border.widthEach
+                { edges | bottom = 2 }
+            ]
+            none
+        , el [ paddingEach { edges | top = padHeight } ] none
+        ]
 
 
 edges =
@@ -305,7 +315,7 @@ education edu =
 
 titleBox : String -> String -> Element Msg
 titleBox title para =
-    paragraph [ paddingXY 0 10 ]
+    paragraph []
         [ el
             [ alignLeft
             , padding 10
