@@ -157,7 +157,7 @@ view model =
                                 , description = "A red circle"
                                 }
                             )
-                        , column [ padding 20, spacing 20, centerX ]
+                        , column [ padding 20, spacing 20, centerX, width fill ]
                             [ el
                                 [ Font.size 30
                                 , centerX
