@@ -297,10 +297,10 @@ education edu =
     let
         viewEducation e =
             column [ paddingXY 0 10 ]
-                [ wrappedRow [ spacing 10 ]
+                [ row [ spacing 10 ]
                     (List.map
                         (\d ->
-                            paragraph
+                            row
                                 [ Font.size 15 ]
                                 [ text <| String.fromInt d ]
                         )
