@@ -112,7 +112,7 @@
           [ { job_title =
                 "Data Analyst"
             , dates =
-                "September 2017 - June 2013"
+                "September 2011 - June 2013"
             , department =
                 "Member Services - Marketing and Membership Unit"
             , story =
